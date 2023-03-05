@@ -45,5 +45,24 @@ body {
     font-size: 18px;
     font-weight: bolder;
     color: #333333;
+    transition: 0.2s;
 }
 
+
+#main #ac {
+    background-color: #f55d4c;
+}
+
+#main #c {
+    background-color: #b78fc0;
+}
+
+#main #operation {
+    background-color: #B5D6B8;
+}
+
+#main button:hover {
+    transform: scale(1.05);
+    background-color: lavender;
+    border: 1px solid coral;
+}
