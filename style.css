@@ -1,0 +1,26 @@
+body {
+    background-color: coral;
+}
+
+#main {
+    height: 500px;
+    width: 375px;
+    margin: auto;
+    margin-top: 10%;
+    place-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1.5px 1.5px 15px grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+
+#screen {
+    width: 340px;
+    height: 100px;
+    background-color: coral;
+    border-radius: 5px;
+    margin-top: 20px;
+}
