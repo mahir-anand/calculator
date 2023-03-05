@@ -42,4 +42,8 @@ body {
     border-radius: 50%;
     border: none;
     box-shadow: 1px 1px 5px grey;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #333333;
 }
+
