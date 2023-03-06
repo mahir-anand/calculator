@@ -1,5 +1,6 @@
 body {
     background-color: coral;
+    font-family: 'Share Tech Mono', monospace;
 }
 
 #main {
@@ -19,11 +20,20 @@ body {
 }
 
 #screen {
-    width: 310px;
+    width: 300px;
     height: 100px;
     background-color: coral;
     border-radius: 5px;
     margin-top: 20px;
+}
+
+#displayValue {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 55px;
+    margin-right: 10px;
+    color: #333333;
+    font-size: 20px;
 }
 
 #row1 {
