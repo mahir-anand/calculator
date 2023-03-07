@@ -8,7 +8,7 @@ let curValue = 0;
 let prevValue = 0;
 let curOperator = "";
 let curOperatorText = "";
-
+ 
 for (let num of nums) {
     num.addEventListener('click', () => {
         curValue = Number(curValue * 10) + Number(num.value);
