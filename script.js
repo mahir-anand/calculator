@@ -21,34 +21,55 @@ for (let operator of operators) {
             prevValue = Number(curValue);
             curValue = Number(0);
             curOperator = operator.value;
-            displayValue.innerHTML = operator.innerHTML;
+            // displayValue.innerHTML = operator.innerHTML;
         } else {
             prevValue = operate(prevValue, curValue, curOperator);
             curValue = Number(0);
             curOperator = operator.value;
-            displayValue.innerHTML = operator.innerHTML;
+            // displayValue.innerHTML = operator.innerHTML;
         }
         
     })
 }
 
 equal.addEventListener('click', () => {
-   operate(prevValue,curValue,curOperator);
+    console.log(prevValue, curValue, curOperator);
+    operate(prevValue,curValue,curOperator);
 })
 
 
-const operate = function operate (prevValue, curValue, curOperator) {
+function operate (prevValue, curValue, curOperator) {
     if (curOperator == "add") {
-        let ans = Number(curValue) + Number(prevValue);
-        console.log(ans);
+        return add (prevValue, curValue)
     } else if (curOperator == "subtract") {
-        let ans = Number(prevValue) - Number(curValue);
-        console.log(ans);
+        return subtract (prevValue, curValue)
     } else if (curOperator == "multiply") {
-        let ans = Number(curValue) * Number(prevValue);
-        console.log(ans);
+        return multiply (prevValue, curValue)
     } else if (curOperator == "divide") {
-        let ans = Number(prevValue) / Number(curValue);
-        console.log(ans);
+        return divide (prevValue, curValue)
     }
+}
+
+function add(prevValue, curValue) {
+    let ans = Number(curValue) + Number(prevValue);
+    displayValue.innerHTML = ans;
+    return ans;
+}
+
+function subtract(prevValue, curValue) {
+    let ans = Number(prevValue) - Number(curValue);
+    displayValue.innerHTML = ans;
+    return ans
+}
+
+function multiply(prevValue, curValue) {
+    let ans = Number(prevValue) * Number(curValue);
+    displayValue.innerHTML = ans;
+    return ans;
+}
+
+function divide(prevValue, curValue) {
+    let ans = Number(prevValue) / Number(curValue);
+    displayValue.innerHTML = ans;
+    return ans;
 }
