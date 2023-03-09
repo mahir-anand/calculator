@@ -50,6 +50,10 @@ function operate (prevValue, curValue, curOperator) {
         return multiply (prevValue, curValue)
     } else if (curOperator == "divide") {
         return divide (prevValue, curValue)
+    } else if (curOperator == "percent") {
+        return percent (prevValue, curValue)
+    } else if (curOperator == "exponent") {
+        return exponent (prevValue, curValue);
     }
 }
 
@@ -73,6 +77,18 @@ function multiply(prevValue, curValue) {
 
 function divide(prevValue, curValue) {
     let ans = Number(prevValue) / Number(curValue);
+    displayValue.innerHTML = ans;
+    return ans;
+}
+
+function percent (prevValue, curValue) {
+    let ans = (Number(prevValue) / 100) * Number(curValue);
+    displayValue.innerHTML = ans;
+    return ans;
+}
+
+function exponent (prevValue, curValue) {
+    let ans = Math.pow(Number(prevValue), Number(curValue));
     displayValue.innerHTML = ans;
     return ans;
 }
