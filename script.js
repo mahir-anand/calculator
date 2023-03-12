@@ -29,11 +29,14 @@ clear.addEventListener('click', () => {
 })
 
 //number listeners
+let i = 1;
 for (let num of nums) {
     num.addEventListener('click', () => {
         if (displayValue.innerHTML.includes(".")) {
-            curValue = curValue + (num.value/10);
+            curValue = Number(curValue) + Number( (num.value/(10**i)) );
+            curValue = curValue.toFixed(i);
             displayValue.innerHTML = curValue;
+            i++;;
         } else {
             curValue = Number(curValue * 10) + Number(num.value);
             displayValue.innerHTML = curValue;
@@ -49,6 +52,7 @@ dot.addEventListener('click', () => {
 //operator listeners
 for (let operator of operators) {
     operator.addEventListener('click', () => {
+        i = 1;
         if (prevValue == 0) {
             displayValue.innerHTML = "";
             prevValue = Number(curValue);
@@ -70,8 +74,14 @@ for (let operator of operators) {
 
 //equal listener
 equal.addEventListener('click', () => {
-    operate(prevValue,curValue,curOperator);
-    contextValue.innerHTML = prevValue.toString() + curOperatorText + curValue.toString() + " = ";
+    i = 1;
+    if (curOperator == ""){
+        displayValue.innerHTML = curValue;
+    } else {
+        operate(prevValue,curValue,curOperator);
+        contextValue.innerHTML = prevValue.toString() + curOperatorText + curValue.toString() + " = ";
+    }
+    
 })
 
 //main operate function
@@ -95,42 +105,54 @@ function operate (prevValue, curValue, curOperator) {
 
 function add(prevValue, curValue) {
     let ans = Number(curValue) + Number(prevValue);
-    ans = ans.toFixed(2);
+    if (!Number.isInteger(ans)) {
+        ans = ans.toFixed(2);
+    }
     displayValue.innerHTML = ans;
     return ans;
 }
 
 function subtract(prevValue, curValue) {
     let ans = Number(prevValue) - Number(curValue);
-    ans = ans.toFixed(2);
+    if (!Number.isInteger(ans)) {
+        ans = ans.toFixed(2);
+    }
     displayValue.innerHTML = ans;
     return ans;
 }
 
 function multiply(prevValue, curValue) {
     let ans = Number(prevValue) * Number(curValue);
-    ans = ans.toFixed(2);
+    if (!Number.isInteger(ans)) {
+        ans = ans.toFixed(2);
+    }
     displayValue.innerHTML = ans;
     return ans;
 }
 
 function divide(prevValue, curValue) {
     let ans = Number(prevValue) / Number(curValue);
-    ans = ans.toFixed(2);
+    if (!Number.isInteger(ans)) {
+        ans = ans.toFixed(2);
+    }
     displayValue.innerHTML = ans;
     return ans;
 }
 
 function percent (prevValue, curValue) {
     let ans = (Number(prevValue) / 100) * Number(curValue);
-    ans = ans.toFixed(2);
+    if (!Number.isInteger(ans)) {
+        ans = ans.toFixed(2);
+    }
     displayValue.innerHTML = ans;
     return ans;
 }
 
 function exponent (prevValue, curValue) {
     let ans = Math.pow(Number(prevValue), Number(curValue));
-    ans = ans.toFixed(2);
+    if (!Number.isInteger(ans)) {
+        ans = ans.toFixed(2);
+    }
     displayValue.innerHTML = ans;
     return ans;
 }
