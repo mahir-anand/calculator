@@ -19,7 +19,7 @@ ac.addEventListener('click', () => {
     curOperator = "";
     curOperatorText = "";
     displayValue.innerHTML = curValue;
-    contextValue.innerHTML = prevValue;
+    contextValue.innerHTML = "";
 })
 
 //delete
@@ -32,6 +32,11 @@ clear.addEventListener('click', () => {
 let i = 1;
 for (let num of nums) {
     num.addEventListener('click', () => {
+        numbers(num);
+    })
+}
+
+    function numbers (num) {
         if (displayValue.innerHTML.includes(".")) {
             curValue = Number(curValue) + Number( (num.value/(10**i)) );
             curValue = curValue.toFixed(i);
@@ -41,36 +46,42 @@ for (let num of nums) {
             curValue = Number(curValue * 10) + Number(num.value);
             displayValue.innerHTML = curValue;
         }
-    })
-}
+    }
 
 //dot listener
 dot.addEventListener('click', () => { 
+    if (displayValue.innerHTML.includes(".")) {
+        return;
+    }
+    // curValue = displayValue.innerHTML;
     displayValue.innerHTML = curValue + ".";
 })
 
 //operator listeners
 for (let operator of operators) {
     operator.addEventListener('click', () => {
-        i = 1;
-        if (prevValue == 0) {
-            displayValue.innerHTML = "";
-            prevValue = Number(curValue);
-            curValue = Number(0);
-            curOperator = operator.value;
-            curOperatorText = operator.innerHTML;
-            contextValue.innerHTML = prevValue + operator.innerHTML;
-        } else {
-            prevValue = operate(prevValue, curValue, curOperator);
-            curValue = Number(0);
-            curOperator = operator.value;
-            curOperatorText = operator.innerHTML;
-            contextValue.innerHTML = prevValue + operator.innerHTML;
-            displayValue.innerHTML = "";
-        }
-        
+        operation(operator);
     })
 }
+
+    function operation (operator) {
+        i = 1;
+            if (prevValue == 0) {
+                displayValue.innerHTML = "";
+                prevValue = Number(curValue);
+                curValue = Number(0);
+                curOperator = operator.value;
+                curOperatorText = operator.innerHTML;
+                contextValue.innerHTML = prevValue + operator.innerHTML;
+            } else {
+                prevValue = operate(prevValue, curValue, curOperator);
+                curValue = Number(0);
+                curOperator = operator.value;
+                curOperatorText = operator.innerHTML;
+                contextValue.innerHTML = prevValue + operator.innerHTML;
+                displayValue.innerHTML = "";
+            }
+    }
 
 //equal listener
 equal.addEventListener('click', () => {
@@ -80,6 +91,8 @@ equal.addEventListener('click', () => {
     } else {
         operate(prevValue,curValue,curOperator);
         contextValue.innerHTML = prevValue.toString() + curOperatorText + curValue.toString() + " = ";
+        curValue = operate(prevValue,curValue,curOperator);
+        prevValue = Number(0);
     }
     
 })
@@ -156,3 +169,36 @@ function exponent (prevValue, curValue) {
     displayValue.innerHTML = ans;
     return ans;
 }
+
+//keyboard listeners
+document.addEventListener('keydown', (e) => {
+
+    for (let num of nums) {
+        if (num.value == e.key) {
+            num.dispatchEvent(new Event('click'));
+        }
+    }
+
+    if (e.key == ".") {
+        dot.dispatchEvent(new Event('click'));
+    } else if (e.key == "Backspace") {
+        clear.dispatchEvent(new Event('click'));
+    } else if (e.key == "%") {
+        operators[0].dispatchEvent(new Event('click'));
+    } else if (e.key == "^") {
+        operators[1].dispatchEvent(new Event('click'));
+    } else if (e.key == "/") {
+        operators[2].dispatchEvent(new Event('click'));
+    } else if (e.key == "*") {
+        operators[3].dispatchEvent(new Event('click'));
+    } else if (e.key == "+") {
+        operators[4].dispatchEvent(new Event('click'));
+    } else if (e.key == "-") {
+        operators[5].dispatchEvent(new Event('click'));
+    } else if (e.key == "Enter" || e.key == "=") {
+        equal.dispatchEvent(new Event('click'));
+    } else if (e.key == "Escape") {
+        ac.dispatchEvent(new Event('click'));
+    }
+
+})
