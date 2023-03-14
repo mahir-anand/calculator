@@ -93,6 +93,7 @@ equal.addEventListener('click', () => {
         contextValue.innerHTML = prevValue.toString() + curOperatorText + curValue.toString() + " = ";
         curValue = operate(prevValue,curValue,curOperator);
         prevValue = Number(0);
+        curOperator = "";
     }
     
 })
