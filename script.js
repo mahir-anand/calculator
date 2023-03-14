@@ -199,6 +199,8 @@ document.addEventListener('keydown', (e) => {
         equal.dispatchEvent(new Event('click'));
     } else if (e.key == "Escape") {
         ac.dispatchEvent(new Event('click'));
+    } else {
+        document.activeElement.blur();
     }
 
 })
